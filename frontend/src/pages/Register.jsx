@@ -27,13 +27,13 @@ export default function Register() {
 
         try {
             // 1. Inscription
-            await axios.post('http://localhost:3000/api/auth/register', {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
                 email: formData.email,
                 password: formData.password
             });
 
             // 2. Connexion automatique
-            const loginResponse = await axios.post('http://localhost:3000/api/auth/login', {
+            const loginResponse = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                 email: formData.email,
                 password: formData.password
             });

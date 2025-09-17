@@ -11,7 +11,7 @@ export default function Contacts() {
     const fetchContacts = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:3000/api/contacts', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contacts`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -57,14 +57,14 @@ export default function Contacts() {
             if (editingId) {
                 // Mise à jour
                 response = await axios.patch(
-                    `http://localhost:3000/api/contacts/${editingId}`,
+                    `${import.meta.env.VITE_API_URL}/api/contacts/${editingId}`,
                     formData,
                     config
                 );
             } else {
                 // Création
                 response = await axios.post(
-                    'http://localhost:3000/api/contacts',
+                    `${import.meta.env.VITE_API_URL}/api/contacts`,
                     formData,
                     config
                 );
@@ -99,7 +99,7 @@ export default function Contacts() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`http://localhost:3000/api/contacts/${id}`, {
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/contacts/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
