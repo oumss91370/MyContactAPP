@@ -11,14 +11,25 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log('Tentative de connexion avec:', { email });
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                 email,
                 password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
+            console.log('Réponse du serveur:', response.data);
             localStorage.setItem('token', response.data.token);
             navigate('/contacts');
         } catch (err) {
-            setError('Identifiants invalides');
+            console.error('Erreur de connexion:', {
+                message: err.message,
+                response: err.response?.data,
+                status: err.response?.status
+            });
+            setError(err.response?.data?.message || 'Erreur de connexion. Veuillez réessayer.');
         }
     };
 
