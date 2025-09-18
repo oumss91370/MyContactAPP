@@ -4,6 +4,14 @@ import Register from './pages/Register';
 import Contacts from './pages/Contacts';
 import './App.css';
 
+useEffect(() => {
+  console.log('URL de l\'API:', import.meta.env.VITE_API_URL);
+
+  fetch(`${import.meta.env.VITE_API_URL}/api/auth/test`)
+    .then(response => response.json())
+    .then(data => console.log('Réponse du serveur:', data))
+    .catch(error => console.error('Erreur de connexion:', error));
+}, []);
 function App() {
   return (
     <div className="app">

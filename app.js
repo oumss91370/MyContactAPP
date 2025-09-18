@@ -27,6 +27,11 @@ mongoose
     .catch(err => console.error("Erreur de connexion à MongoDB:", err));
 
 app.use(checkUser);
+// test
+app.get('/api/auth/test', (req, res) => {
+  console.log('Test de connexion reçu');
+  res.json({ status: 'success', message: 'API fonctionnelle !' });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
